@@ -1,0 +1,5 @@
+name: NexsSigns
+author: thmihnea
+version: 1.0
+description: "Implementation of SkyPvP signs."
+main: by.thmihnea.nexssigns.NexsSigns

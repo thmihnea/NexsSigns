@@ -2,7 +2,10 @@ package by.thmihnea.nexssigns.listener;
 
 import by.thmihnea.nexssigns.NexsSigns;
 import by.thmihnea.nexssigns.cache.SignRepository;
+import by.thmihnea.nexssigns.cooldown.Cooldown;
+import by.thmihnea.nexssigns.cooldown.CooldownType;
 import by.thmihnea.nexssigns.listener.annotation.Listen;
+import by.thmihnea.nexssigns.object.PlayerWrapper;
 import by.thmihnea.nexssigns.object.SignWrapper;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,8 +40,19 @@ public class SignInteractionListener implements Listener {
         Sign sign = (Sign) block.getState();
         if (!(this.signRepository.contains(sign))) return;
         SignWrapper signWrapper = this.signRepository.getFromSign(sign);
-        ItemStack itemStack = new ItemStack(signWrapper.getMaterial(), signWrapper.getAmount());
+
         Player player = e.getPlayer();
+        PlayerWrapper playerWrapper = this.plugin.getPlayerRepository().getByPlayer(player);
+        if (playerWrapper.hasCooldown(signWrapper.getMaterial())) {
+            Cooldown cooldown = playerWrapper.getCooldownByMaterial(signWrapper.getMaterial());
+            cooldown.sendCooldownMessage();
+            return;
+        }
+        CooldownType cooldownType = new CooldownType(signWrapper.getMaterial());
+        Cooldown cooldown = new Cooldown(player, cooldownType, signWrapper.getCooldown(), this.plugin);
+        playerWrapper.addCooldown(cooldown);
+
+        ItemStack itemStack = new ItemStack(signWrapper.getMaterial(), signWrapper.getAmount());
         player.getInventory().addItem(itemStack);
     }
 

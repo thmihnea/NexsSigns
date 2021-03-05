@@ -6,3 +6,4 @@ sign-format:
   - "&6{amount}&ex &6{itemName}"
   - ""
   - "&7&o(( Click ))"
+cooldown-message: "&cYou can't access this sign yet! {timeLeft} left before becoming re-accessible."

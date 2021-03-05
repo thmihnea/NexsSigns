@@ -18,7 +18,8 @@ public class ListenerManager {
     }
 
     public void register() {
-        List<Class<? extends Listener>> listeners = Arrays.asList(SignCreationListener.class, SignInteractionListener.class);
+        List<Class<? extends Listener>> listeners = Arrays.asList(SignCreationListener.class, SignInteractionListener.class,
+                PlayerWrapperListener.class);
 
         listeners.forEach(listener -> {
             try {

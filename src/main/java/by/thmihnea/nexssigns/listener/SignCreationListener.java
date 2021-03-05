@@ -7,7 +7,6 @@ import by.thmihnea.nexssigns.cache.SignRepository;
 import by.thmihnea.nexssigns.file.SignManager;
 import by.thmihnea.nexssigns.listener.annotation.Listen;
 import by.thmihnea.nexssigns.object.SignWrapper;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;

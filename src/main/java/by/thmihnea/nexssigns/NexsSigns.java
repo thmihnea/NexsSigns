@@ -1,5 +1,6 @@
 package by.thmihnea.nexssigns;
 
+import by.thmihnea.nexssigns.cache.PlayerRepository;
 import by.thmihnea.nexssigns.cache.SignRepository;
 import by.thmihnea.nexssigns.file.ConfigManager;
 import by.thmihnea.nexssigns.file.FileManager;
@@ -14,6 +15,7 @@ public class NexsSigns extends JavaPlugin {
     private FileManager fileManager;
     private ConfigManager configManager;
     private SignManager signManager;
+    private PlayerRepository playerRepository;
 
     @Override
     public void onEnable() {
@@ -23,6 +25,7 @@ public class NexsSigns extends JavaPlugin {
         this.configManager = new ConfigManager(this);
         this.signRepository = new SignRepository(this);
         this.signManager = new SignManager(this);
+        this.playerRepository = new PlayerRepository(this);
         this.listenerManager = new ListenerManager(this);
 
         LoggerUtil.logInfo("All modules have been enabled. Process took: " + (System.currentTimeMillis() - stopWatch) + "ms.");
@@ -51,5 +54,9 @@ public class NexsSigns extends JavaPlugin {
 
     public SignManager getSignManager() {
         return this.signManager;
+    }
+
+    public PlayerRepository getPlayerRepository() {
+        return this.playerRepository;
     }
 }

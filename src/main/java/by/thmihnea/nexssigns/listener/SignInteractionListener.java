@@ -63,6 +63,7 @@ public class SignInteractionListener implements Listener {
         if (!(block.getType().toString().toUpperCase().contains("SIGN"))) return;
         Sign sign = (Sign) block.getState();
         if (!(this.signRepository.contains(sign))) return;
+        if(!e.getPlayer().isOp()) return;
         SignWrapper signWrapper = this.signRepository.getFromSign(sign);
         this.signRepository.removeEntry(signWrapper);
         File file = new File(this.plugin.getDataFolder(), "signs.yml");
